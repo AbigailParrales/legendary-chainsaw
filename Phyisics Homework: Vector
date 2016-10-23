@@ -1,0 +1,87 @@
+import math
+def vector_por_componentes():
+    def pedir_vector_uno():
+        v1x = float(input("Dame el valor en x del primer vector:"))
+        v1y = float(input("Dame el valor en y del primer vector:"))
+        return v1x, v1y
+
+    def pedir_vector_dos():
+        v2x = float(input("Dame el valor en x del segundo vector:"))
+        v2y = float(input("Dame el valor en y del segundo vector:"))
+        return v2x , v2y
+    def componentes_vector_resultante():
+        Vector_Resultante_X = (v1x + v2x)
+        Vector_Resultante_Y = (v1y + v2y)
+        return Vector_Resultante_X , Vector_Resultante_Y
+
+    def magnitur_vector_resultante(Vector_Resultante_X, Vector_Resultante_Y):
+        MVR = (((Vector_Resultante_X **2) + (Vector_Resultante_Y**2))**.5)
+        return MVR
+
+    v1x , v1y = pedir_vector_uno()
+    v2x , v2y = pedir_vector_dos()
+    Vector_Resultante_X , Vector_Resultante_Y = componentes_vector_resultante()
+    MVR = magnitur_vector_resultante(Vector_Resultante_X, Vector_Resultante_Y)
+    print ("El vector resultante es <" +str(Vector_Resultante_X) + ", "+ str(Vector_Resultante_Y) + ">")
+    print("su magnitud es de " +str(MVR)+ "." )
+
+def bienvenida():
+    print("Este programa te ayuda a calcular un vector resultante")
+    print("Tiene dos modalidades:")
+    print("La primera determina el vector resultante tras haberle dado las componentes de dos vectores")
+    print("La segunda determina el vector resultante tras haber recibido la magnitud de tres vectores y sus ángulos")
+    Eleccion = input("Muy bien, ahora que te he explicado, qué opción deseas usar? La primera opción (1) o la segunda opción (2)?")
+    if int(Eleccion) == 1:
+        vector_por_componentes()
+    elif int(Eleccion) == 2:
+        vector_por_magnitud()
+
+def vector_por_magnitud():
+    def pedir_vectores_magnitudes():
+        v1 = input("La magnitud del vector uno es:")
+        v2 = input("La magnitud del vector dos es:")
+        v3 = input("La magnitud del vector tres es:")
+        return v1, v2, v3
+
+    def pedir_angulos_vectores():
+        thetav1 = float(input("El ángulo respecto a +x del vector uno es:"))
+        thetav2 = float(input("El ángulo respecto a +x del vector uno es:"))
+        thetav3 = float(input("El ángulo respecto a +x del vector uno es:"))
+
+        tv1r = math.radians(thetav1)
+        tv2r = math.radians(thetav2)
+        tv3r = math.radians(thetav3)
+        return tv1r, tv2r, tv3r
+
+    def calcular_componentes(v1, v2, v3, thetav1, thetav2, thetav3):
+        v1x = float(v1) * math.cos(float(thetav1))
+        v1y = float(v1) * math.sin(float(thetav1))
+        v2x = float(v2) * math.cos(float(thetav2))
+        v2y = float(v2) * math.sin(float(thetav2))
+        v3x = float(v3) * math.cos(float(thetav3))
+        v3y = float(v3) * math.sin(float(thetav3))
+        return v1x, v1y, v2x, v2y, v3x, v3y
+
+    def dar_componentes(v1x, v1y, v2x, v2y, v3x, v3y):
+        print("Las componentes del vector uno son: <" + str(round((v1x), 2)) + ", " + str(round((v1y), 2)) + ">")
+        print("Las componentes del vector dos son: <" + str(round((v2x), 2)) + ", " + str(round((v2y), 2)) + ">")
+        print("Las componentes del vector tres son: <" + str(round((v3x), 2)) + "," + str(round((v3y), 2)) + ">")
+
+    def calcular_resultante(v1x, v1y, v2x, v2y, v3x, v3y):
+        componentes_vector_resultante_x = v1x + v2x + v3x
+        componentes_vector_resultante_y = v1y + v2y + v3y
+        magnitud_vector_resultante = ((float(componentes_vector_resultante_x)**float(2)) + ((float(componentes_vector_resultante_y)**float(2)))**float(.5))
+        angulo_vector_resultante = math.degrees(math.atan( (float(componentes_vector_resultante_y)) / (float(componentes_vector_resultante_x)) )  )
+
+        print("Las componentes del vector resultante son: <" + str(round((componentes_vector_resultante_x), 2)) + "," + str(round((componentes_vector_resultante_y), 2)) + ">")
+        print("La magnitud del vector resultante es:" + str(magnitud_vector_resultante))
+        print("El angulo del vector resultante es: " + str(angulo_vector_resultante))
+
+    v1, v2, v3 = pedir_vectores_magnitudes()
+    thetav1, thetav2, thetav3 = pedir_angulos_vectores()
+    v1x, v1y, v2x, v2y, v3x, v3y = calcular_componentes(v1, v2, v3, thetav1, thetav2, thetav3)
+    dar_componentes(v1x, v1y, v2x, v2y, v3x, v3y)
+    calcular_resultante(v1x, v1y, v2x, v2y, v3x, v3y)
+
+
+bienvenida()
